@@ -1,0 +1,31 @@
+
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Flet installieren
+        run: pip install flet
+
+      - name: APK bauen
+        run: flet build apk --yes --verbose
+
+      - name: APK bereitstellen
+        uses: actions/upload-artifact@v4
+        with:
+          name: UniversalModManager-APK
+          path: build/apk/*.apk
