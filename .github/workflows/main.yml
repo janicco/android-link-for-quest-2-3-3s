@@ -15,7 +15,8 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          command: buildozer android debug
+          # Füge hier das "-v" ein, damit Buildozer redselig wird!
+          command: buildozer -v android debug
 
       - name: Fertige APK speichern (Artifact)
         uses: actions/upload-artifact@v4
